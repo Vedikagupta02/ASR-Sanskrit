@@ -44,6 +44,4 @@ The model combines **Convolutional** and **Bidirectional LSTM** layers with a **
 ✅ **Greedy decoding** for fast inference  
 ✅ Extensible to **beam search + language model (KenLM)**  
 
----
-
-## 📂 Directory Structure  
+ 
