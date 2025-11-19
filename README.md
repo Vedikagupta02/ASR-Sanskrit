@@ -1,47 +1,50 @@
-#  Sanskrit Speech Recognition  
-### Character-Level ASR using CNN–BiLSTM + CTC–Attention Hybrid Model  
+Sanskrit Speech Recognition
+Character-Level ASR using CNN–BiLSTM + Hybrid CTC–Attention Model
 
-This project implements an **end-to-end Automatic Speech Recognition (ASR)** system for **Sanskrit**, a low-resource and morphologically rich language.  
-The model combines **Convolutional** and **Bidirectional LSTM** layers with a **hybrid CTC + Attention** decoding approach for robust alignment and contextual understanding.
+This repository presents an end-to-end Automatic Speech Recognition (ASR) system for Sanskrit, a low-resource and highly inflectional language.
+The model integrates a CNN–BiLSTM encoder with a Hybrid CTC + Attention decoder, enabling both strong alignment (CTC) and contextual understanding (Attention).
 
----
+🚀 Overview
 
-##  Overview  
-- **Architecture:** CNN + BiLSTM Encoder with CTC + Attention Decoder  
-- **Features:** 240-dim log-Mel spectrograms (with delta + delta-delta)  
-- **Augmentation:** SpecAugment (time & frequency masking)  
-- **Loss Function:** Weighted combination of CTC and Cross-Entropy  
-- **Dataset:** 3,600+ aligned Sanskrit audio–text pairs  
-- **Metrics:** Word Error Rate (WER), Character Error Rate (CER)
+Architecture: CNN + BiLSTM Encoder with CTC + Attention Decoder
 
----
+Acoustic Features: 240-dim log-Mel spectrograms
 
-##  Model Highlights  
-| Component | Description |
-|------------|-------------|
-| **Encoder** | 1D CNN frontend + 2-layer BiLSTM |
-| **Decoder** | Attention-based LSTM |
-| **Loss** | Hybrid (α·CTC + (1−α)·CE) |
-| **Optimization** | AdamW + gradient clipping + mixed precision |
-| **Framework** | PyTorch (GPU-optimized) |
+Augmentation: SpecAugment (time & frequency masking)
 
----
+Decoding: Beam Search + 3-gram KenLM Language Model
 
-##  Results  
-| Metric | Score |
-|---------|--------|
-| **Word Error Rate (WER)** | **0.69** |
-| **Character Error Rate (CER)** | **0.155** |
+Loss Function: Hybrid α·CTC + (1−α)·Cross-Entropy
 
-> Achieved strong recognition accuracy on a **low-resource Sanskrit dataset** with limited speaker diversity.
+Dataset: 3,600+ Sanskrit audio–text pairs
 
----
+Metrics: Word Error Rate (WER), Character Error Rate (CER)
 
-##  Key Features  
-✅ End-to-end **CTC + Attention** hybrid training  
-✅ **Character-level decoding** for better generalization  
-✅ **SpecAugment** for noise and time variation robustness  
-✅ **Greedy decoding** for fast inference  
-✅ Extensible to **beam search + language model (KenLM)**  
+🧠 Model Architecture
+Component	Description
+Encoder	CNN frontend + 2-layer BiLSTM
+Decoder	Attention-based LSTM
+Loss	Hybrid CTC + Cross-Entropy
+Language Model	3-gram KenLM integrated into beam search
+Optimization	AdamW, Gradient Clipping, Mixed Precision
+Framework	PyTorch (GPU-accelerated)
+📊 Results (Beam Search + LM)
+Metric	Score
+Word Error Rate (WER)	0.418
+Character Error Rate (CER)	0.103
 
- 
+Using a character-level 3-gram LM significantly improved decoding stability and reduced substitution errors.
+
+🔑 Key Features
+
+✅ Hybrid CTC + Attention end-to-end training
+
+✅ Character-level decoding → strong generalization for low-resource languages
+
+✅ SpecAugment for robustness
+
+✅ Beam Search + KenLM for improved decoding
+
+✅ Extensible to BPE/subwords and Transformer/Conformer encoders
+
+✅ Clean, modular PyTorch implementation
